@@ -1,24 +1,39 @@
-facebook:
-  label: Facebook
-  permalink: /facebook
-  description: Facebook tag description
+github:
+  label: GitHub
+  permalink: /github
+  description: GitHub tag description
 
-hello:
-  label: 啥
-  permalink: /hello
-  description: Hello tag description
+sping-boot:
+  label: sping-boot
+  permalink: /sping-boot
+  description: sping-boot tag description
 
-docusaurus:
-  label: Docusaurus
-  permalink: /docusaurus
-  description: Docusaurus tag description
+mysql:
+  label: MySQL
+  permalink: /mysql
+  description: MySQL tag description
 
-hola:
-  label: Hola
-  permalink: /hola
-  description: Hola tag description
+mybatis-plus:
+  label: mybatis-plus
+  permalink: /mybatis-plus
+  description: mybatis-plus tag description
+
+java:
+  label: Java
+  permalink: /java
+  description: Java
 
 server:
   label: 服务器
   permalink: /server
   description: 服务器
+
+caddy:
+  label: Caddy
+  permalink: /caddy
+  description: 类似nginx
+
+termux:
+  label: Termux
+  permalink: /termux
+  description: 手机模拟linux应用

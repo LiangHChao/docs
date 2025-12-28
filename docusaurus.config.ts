@@ -1,62 +1,70 @@
+// docusaurus.config.ts
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
-
 const config: Config = {
   title: '文档',
-  tagline: 'Dinosaurs are cool',
+  tagline: '欢迎使用',
   favicon: 'img/favicon.ico',
 
-  // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
+  onBrokenLinks: 'ignore',
+  onBrokenMarkdownLinks: 'ignore',
+
   future: {
-    v4: true, // Improve compatibility with the upcoming Docusaurus v4
+    v4: true,
   },
 
-  // Set the production url of your site here
   url: 'https://lianghchao.github.io',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/docs/',
+  baseUrl: '/docs/', // GitHub Pages 部署路径
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'LiangHChao', // Usually your GitHub org/user name.
-  projectName: 'docs', // Usually your repo name.
+  organizationName: 'LiangHChao',
+  projectName: 'docs',
 
-  onBrokenLinks: 'throw',
-
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
   },
 
+  // ✅ 关键：使用 plugins 定义多个 docs 实例
+  plugins: [
+    // 主文档（默认）
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'default',
+        path: '/docs/docs',
+        routeBasePath: 'docs', // ← 无前导 /
+        sidebarPath: require.resolve('./sidebars.js'),
+        editUrl: 'https://github.com/LiangHChao/docs/edit/master',
+      },
+    ],
+    // 👇 Javadoc 文档（修正版）
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'javadoc',
+        path: 'javadoc',         // 源文件目录
+        routeBasePath: 'javadoc', // ← 重点：不要 / 开头！
+        sidebarPath: require.resolve('./sidebarsJavadoc.js'), // ← 独立侧边栏
+        // breadcrumbs: true,
+        editUrl: 'https://github.com/LiangHChao/docs/edit/master',
+      },
+    ],
+  ],
+
   presets: [
     [
       'classic',
       {
-        docs: {
-          sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/LiangHChao/docs/',
-        },
+        docs: false, // 已在 plugins 中配置，此处禁用
         blog: {
           showReadingTime: true,
           feedOptions: {
             type: ['rss', 'atom'],
             xslt: true,
           },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          // Useful options to enforce blogging best practices
+          editUrl: 'https://github.com/LiangHChao/docs/edit/master',
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
@@ -69,7 +77,6 @@ const config: Config = {
   ],
 
   themeConfig: {
-    // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     colorMode: {
       respectPrefersColorScheme: true,
@@ -82,14 +89,16 @@ const config: Config = {
       },
       items: [
         {
-          type: 'doc',
-          docId: 'intro', // ← 这里！如果 intro.md 不存在，就会坏链
+          type: 'docSidebar',
+          sidebarId: 'tutorialSidebar',
           position: 'left',
           label: '示例',
         },
         {to: '/blog', label: '博客', position: 'left'},
+        // ✅ 导航到 javadoc 首页
+        {to: '/javadoc', label: 'Java', position: 'left'}, // 自动跳转到 javadoc/intro
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/LiangHChao/docs',
           label: 'GitHub',
           position: 'right',
         },
@@ -103,7 +112,7 @@ const config: Config = {
           items: [
             {
               label: 'Tutorial',
-              to: '/docs/intro',
+              to: '/docs/docs/intro',
             },
           ],
         },

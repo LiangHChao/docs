@@ -2,11 +2,11 @@
 sidebar_position: 1
 ---
 
-# 快速开始
+# 模块介绍
 
-Let's discover **Docusaurus in less than 5 minutes**.
+这里是 **文档目录**.
 
-## Getting Started
+## 开始
 
 Get started by **creating a new site**.
 
