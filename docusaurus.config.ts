@@ -51,6 +51,17 @@ const config: Config = {
         editUrl: 'https://github.com/LiangHChao/docs/edit/master',
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'sqlDoc',
+        path: 'sql-doc',         // 源文件目录
+        routeBasePath: 'sqlDoc', // ← 重点：不要 / 开头！
+        sidebarPath: require.resolve('./sidebarsSQLdoc.ts'), // ← 独立侧边栏
+        // breadcrumbs: true,
+        editUrl: 'https://github.com/LiangHChao/docs/edit/master',
+      },
+    ],
   ],
 
   presets: [
@@ -92,9 +103,8 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: '示例',
+          label: '文档',
         },
-        {to: '/blog', label: '博客', position: 'left'},
         // ✅ 导航到 javadoc 首页
         {
           type: 'docSidebar',
@@ -103,6 +113,14 @@ const config: Config = {
           position: 'left',
           label: 'Java',
         },
+        {
+          type: 'docSidebar',
+          sidebarId: 'sqlSidebar',
+          docsPluginId: 'sqlDoc',
+          position: 'left',
+          label: 'SQL',
+        },
+        {to: '/blog', label: '博客', position: 'left'},
         {
           href: 'https://github.com/LiangHChao/docs',
           label: 'GitHub',
