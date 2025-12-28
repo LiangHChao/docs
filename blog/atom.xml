@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="atom.xsl"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lianghchao.github.io/docs/blog</id>
-    <title>文档 Blog</title>
+    <title>LiangHChao的个人博客项目 Blog</title>
     <updated>2025-12-27T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lianghchao.github.io/docs/blog"/>
-    <subtitle>文档 Blog</subtitle>
+    <subtitle>LiangHChao的个人博客项目 Blog</subtitle>
     <icon>https://lianghchao.github.io/docs/img/favicon.ico</icon>
     <entry>
         <title type="html"><![CDATA[旧手机搭服务器]]></title>

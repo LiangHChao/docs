@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="rss.xsl"?>
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
-        <title>文档 Blog</title>
+        <title>LiangHChao的个人博客项目 Blog</title>
         <link>https://lianghchao.github.io/docs/blog</link>
-        <description>文档 Blog</description>
+        <description>LiangHChao的个人博客项目 Blog</description>
         <lastBuildDate>Sat, 27 Dec 2025 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
