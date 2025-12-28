@@ -6,11 +6,11 @@ sidebar_position: 1
 
 Let's discover **Docusaurus in less than 5 minutes**.
 
-## Getting Started
+## 开始
 
 Get started by **creating a new site**.
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+Or **try Docusaurus immediately** with **[官网](https://docusaurus.new)**.
 
 ### What you'll need
 
