@@ -33,9 +33,9 @@ const config: Config = {
       '@docusaurus/plugin-content-docs',
       {
         id: 'default',
-        path: '/docs/docs',
+        path: 'docs',
         routeBasePath: 'docs', // ← 无前导 /
-        sidebarPath: require.resolve('./sidebars.js'),
+        sidebarPath: require.resolve('./sidebars.ts'),
         editUrl: 'https://github.com/LiangHChao/docs/edit/master',
       },
     ],
@@ -46,7 +46,7 @@ const config: Config = {
         id: 'javadoc',
         path: 'javadoc',         // 源文件目录
         routeBasePath: 'javadoc', // ← 重点：不要 / 开头！
-        sidebarPath: require.resolve('./sidebarsJavadoc.js'), // ← 独立侧边栏
+        sidebarPath: require.resolve('./sidebarsJavadoc.ts'), // ← 独立侧边栏
         // breadcrumbs: true,
         editUrl: 'https://github.com/LiangHChao/docs/edit/master',
       },
@@ -96,7 +96,13 @@ const config: Config = {
         },
         {to: '/blog', label: '博客', position: 'left'},
         // ✅ 导航到 javadoc 首页
-        {to: '/javadoc', label: 'Java', position: 'left'}, // 自动跳转到 javadoc/intro
+        {
+          type: 'docSidebar',
+          sidebarId: 'javaSidebar',
+          docsPluginId: 'javadoc',
+          position: 'left',
+          label: 'Java',
+        },
         {
           href: 'https://github.com/LiangHChao/docs',
           label: 'GitHub',
