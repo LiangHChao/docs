@@ -10,7 +10,6 @@ const config: Config = {
 
   onBrokenLinks: 'ignore',
   onBrokenMarkdownLinks: 'ignore',
-
   future: {
     v4: true,
   },
@@ -135,25 +134,17 @@ const config: Config = {
           title: 'Docs',
           items: [
             {
-              label: 'Tutorial',
+              label: '文档',
               to: '/docs/docs/intro',
             },
           ],
         },
         {
-          title: 'Community',
+          title: 'Learn More',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'X',
-              href: 'https://x.com/docusaurus',
+              label: 'RuoYi-Plus',
+              href: 'https://plus-doc.top/',
             },
           ],
         },
@@ -161,11 +152,11 @@ const config: Config = {
           title: 'More',
           items: [
             {
-              label: 'Blog',
+              label: '博客',
               to: '/blog',
             },
             {
-              label: 'GitHub',
+              label: '官方Github',
               href: 'https://github.com/facebook/docusaurus',
             },
           ],

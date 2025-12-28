@@ -8,6 +8,13 @@ Let's discover **Docusaurus in less than 5 minutes**.
 
 ## 开始
 
+## 发布
+# powershell
+```shell
+$env:GIT_USER="LiangHChao"
+>> yarn deploy
+```
+
 Get started by **creating a new site**.
 
 Or **try Docusaurus immediately** with **[官网](https://docusaurus.new)**.
