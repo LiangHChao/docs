@@ -4,7 +4,7 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: '文档',
+  title: 'LiangHChao的个人博客项目',
   tagline: '欢迎使用',
   favicon: 'img/favicon.ico',
 
