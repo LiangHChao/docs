@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkdocs=globalThis.webpackChunkdocs||[]).push([[8935],{2646(a){a.exports=JSON.parse('{"tags":[{"label":"server","permalink":"/docs/javadoc/tags/server","count":2},{"label":"github","permalink":"/docs/javadoc/tags/github","count":1},{"label":"workflow","permalink":"/docs/javadoc/tags/workflow","count":1}]}')}}]);
