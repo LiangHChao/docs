@@ -146,6 +146,10 @@ const config: Config = {
               label: 'RuoYi-Plus',
               href: 'https://plus-doc.top/',
             },
+            {
+              label: 'no-ip',
+              href: 'https://my.noip.com/',
+            },
           ],
         },
         {
@@ -156,7 +160,7 @@ const config: Config = {
               to: '/blog',
             },
             {
-              label: '官方Github',
+              label: 'Dinosaurs',
               href: 'https://github.com/facebook/docusaurus',
             },
           ],
