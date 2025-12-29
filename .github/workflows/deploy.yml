@@ -1,13 +1,15 @@
-# .github/workflows/deploy.yml
 name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [master]  # 当 master 分支有推送时触发
+    branches: [master]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # 👈 显式授权（GitHub Actions 最佳实践）
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -16,16 +18,26 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'npm'  # 👈 改为 npm 缓存
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci  # 👈 推荐用 npm ci（比 npm install 更可靠，用于 CI）
+        run: npm ci
 
       - name: Build
         run: npm run build
+
+      - name: Verify build output
+        run: |
+          ls -la ./build
+          if [ ! -d "./build" ] || [ -z "$(ls -A ./build)" ]; then
+            echo "❌ Build directory is missing or empty!"
+            exit 1
+          fi
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
