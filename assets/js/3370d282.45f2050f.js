@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkdocs=globalThis.webpackChunkdocs||[]).push([[8152],{4262(s){s.exports=JSON.parse('{"tags":[{"label":"mysql","permalink":"/docs/sqlDoc/tags/mysql","count":1}]}')}}]);
