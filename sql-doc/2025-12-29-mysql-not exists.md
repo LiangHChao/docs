@@ -1,12 +1,14 @@
 ---
-slug: server-github-workflow
-title: GitHub Workflow
+slug: mysql-exists
+title: Mysql EXISTS
 authors: [ lianghchao ]
 tags: [ mysql ]
 ---
-## NOT EXISTS的使用及*逆向思维*
+
+### NOT EXISTS的使用及*逆向思维*
 - 查询护士能做的项目ID-护士必须要能做项目中所有核心项目
-```mysql
+
+```sql
 SELECT DISTINCT csp.project_id
 FROM project csp
 WHERE csp.status = '0'  -- 假设项目有状态字段，0=启用（按实际调整）
