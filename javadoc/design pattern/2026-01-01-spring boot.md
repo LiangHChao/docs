@@ -1,5 +1,5 @@
 ---
-slug: java-spring-boot-design-patterns
+slug: java-design patterns-spring boot
 title: spring boot中常见的设计模式
 authors: [ lianghchao ]
 tags: [ java,file ]
@@ -85,12 +85,62 @@ public class PaymentService {
 #### 🔧 核心实现
 - 抽象父类定义算法骨架
 - 子类/回调函数实现具体步骤
-#### 💡 示例：JdbcTemplate
+#### 💡 示例：RedisTemplate
 ```java
-// 封装了连接获取、异常转换、资源关闭等固定流程
-List<User> users = jdbcTemplate.query("SELECT * FROM user",
-                (rs, rowNum) -> new User(rs.getString("name")) // 用户仅需提供 RowMapper
-);
+// RedisTemplate.java (简化版源码逻辑)
+public <T> T execute(RedisCallback<T> action) {
+  // 1️⃣ 获取连接（不变）
+  RedisConnectionFactory factory = getConnectionFactory();
+  RedisConnection conn = factory.getConnection();
+
+  try {
+    // 2️⃣ 执行用户自定义逻辑（可变）← 回调点！
+    T result = action.doInRedis(conn);
+
+    // 3️⃣ 反序列化结果（不变）
+    return deserializeResult(result);
+
+  } catch (Exception e) {
+    // 4️⃣ 异常转换（不变）
+    throw convertRedisAccessException(e);
+  } finally {
+    // 5️⃣ 释放资源（不变）
+    conn.close();
+  }
+}
+```
+#### 1：基础用法（显式回调）
+- 用户重写 RedisCallback中的方法实现实现自定义
+```java
+@Autowired
+private RedisTemplate<String, Object> redisTemplate;
+
+public String getValue(String key) {
+    return redisTemplate.execute(new RedisCallback<String>() {
+        @Override
+        public String doInRedis(RedisConnection connection) throws DataAccessException {
+            // 👇 只需关注这一行：执行 GET 命令
+            byte[] value = connection.get(key.getBytes(StandardCharsets.UTF_8));
+            return value != null ? new String(value, StandardCharsets.UTF_8) : null;
+        }
+    });
+}
+```
+#### 2：Lambda 表达式（推荐）
+```java
+public Long incrementCounter(String key) {
+    return redisTemplate.execute(connection -> 
+        connection.incr(key.getBytes(StandardCharsets.UTF_8))
+    );
+}
+```
+#### 复杂操作（Hash 操作）
+```java
+public Map<byte[], byte[]> getHashAll(String hashKey) {
+    return redisTemplate.execute(connection -> 
+        connection.hGetAll(hashKey.getBytes(StandardCharsets.UTF_8))
+    );
+}
 ```
 #### 🌟 其他应用
 - RedisTemplate：封装 Redis 连接操作
@@ -157,10 +207,10 @@ public interface PayStrategy {
 
 // 2. 具体策略
 @Service("alipay")
-public class AlipayStrategy implements PayStrategy { ... }
+public class AlipayStrategy implements PayStrategy { }
 
 @Service("wechat")
-public class WechatPayStrategy implements PayStrategy { ... }
+public class WechatPayStrategy implements PayStrategy { }
 
 // 3. 上下文调用
 @Service
@@ -226,17 +276,103 @@ public class DecryptFilter implements Filter {
 #### 🔧 核心实现
 - HandlerAdapter：适配不同类型的 Controller
 - 日志门面：SLF4J 适配 Logback/Log4j
-#### 💡 示例：HandlerAdapter
+#### 💡 手写一个适配器模式示例
+- 假设我们要将 旧版支付接口 适配为 新版统一支付接口。
+
+#### 1：定义目标接口（新版）
 ```java
-// DispatcherServlet 通过适配器调用各种 Controller
-for (HandlerAdapter adapter : handlerAdapters) {
-   if (adapter.supports(handler)) {
-   // 适配 @RequestMapping, HttpRequestHandler, Servlet 等
-   adapter.handle(request, response, handler);
-   break;
-   }
+// 新版统一支付接口
+public interface PaymentProcessor {
+  boolean pay(String orderId, BigDecimal amount);
 }
 ```
+#### 2：旧版接口（旧版）
+```java
+// 第三方支付宝 SDK（不可修改）
+public class AlipayClient {
+    public String sendPayment(String tradeNo, double money) {
+        // 返回 "SUCCESS" 或错误码
+        return "SUCCESS";
+    }
+}
+
+```
+#### 3：创建适配器
+```java
+// 适配器：将 AlipayClient 适配为 PaymentProcessor
+@Component
+public class AlipayAdapter implements PaymentProcessor {
+    
+    private final AlipayClient alipayClient;
+    
+    public AlipayAdapter() {
+        this.alipayClient = new AlipayClient(); // 或通过 DI 注入
+    }
+    
+    @Override
+    public boolean pay(String orderId, BigDecimal amount) {
+        // 1. 转换参数类型（BigDecimal → double）
+        double money = amount.doubleValue();
+        
+        // 2. 调用旧接口
+        String result = alipayClient.sendPayment(orderId, money);
+        
+        // 3. 转换返回值（String → boolean）
+        return "SUCCESS".equals(result);
+    }
+}
+```
+#### 4：使用适配器
+```java
+@Service
+public class OrderService {
+    
+    // 依赖抽象，而非具体实现
+    private final PaymentProcessor paymentProcessor;
+    
+    public OrderService(PaymentProcessor paymentProcessor) {
+        this.paymentProcessor = paymentProcessor; // Spring 自动注入 AlipayAdapter
+    }
+    
+    public void completeOrder(String orderId, BigDecimal amount) {
+        if (paymentProcessor.pay(orderId, amount)) {
+            // 支付成功
+        }
+    }
+}
+```
+#### 如果有多个实现？怎么办？
+#### 用 @Primary 指定首选
+```java
+@Component
+@Primary // 👈 默认优先使用这个
+public class AlipayAdapter implements PaymentProcessor {  }
+```
+#### 用 @Qualifier 指定
+```java
+@Service
+public class OrderService {
+
+    private final PaymentProcessor paymentProcessor;
+
+    public OrderService(@Qualifier("wechatPayAdapter") PaymentProcessor paymentProcessor) {
+        this.paymentProcessor = paymentProcessor;
+    }
+}
+```
+#### 按条件注册（高级）
+```java
+@Component
+@ConditionalOnProperty(name = "payment.provider", havingValue = "alipay")
+public class AlipayAdapter implements PaymentProcessor {  }
+```
+#### yml中配置
+```yml
+payment:
+  provider: alipay
+```
+
+
 #### 🌐 其他应用
 - HttpMessageConverter：适配不同数据格式（JSON/XML）
 - TaskExecutor：适配不同线程池实现

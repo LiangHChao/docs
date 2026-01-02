@@ -1,5 +1,5 @@
 ---
-slug: design patterns-Chain of Responsibility
+slug: java-design patterns-Chain of Responsibility
 title: 责任链模式
 authors: [ lianghchao ]
 tags: [ design patterns ]
