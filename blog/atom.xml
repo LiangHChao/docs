@@ -26,6 +26,165 @@
         <category label="docusaurus" term="docusaurus"/>
     </entry>
     <entry>
+        <title type="html"><![CDATA[架构级项目]]></title>
+        <id>https://lianghchao.github.io/docs/blog/java-spring boot</id>
+        <link href="https://lianghchao.github.io/docs/blog/java-spring boot"/>
+        <updated>2026-02-10T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[什么是架构级项目？]]></summary>
+        <content type="html"><![CDATA[<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="什么是架构级项目">什么是架构级项目？<a href="https://lianghchao.github.io/docs/blog/java-spring%20boot#%E4%BB%80%E4%B9%88%E6%98%AF%E6%9E%B6%E6%9E%84%E7%BA%A7%E9%A1%B9%E7%9B%AE" class="hash-link" aria-label="Direct link to 什么是架构级项目？" title="Direct link to 什么是架构级项目？" translate="no">​</a></h3>
+<p><strong>简单理解：</strong>
+架构级项目 ≠ 功能多的项目
+而是指：<strong>从第一天就考虑长远发展，代码结构清晰，容易维护和扩展的项目</strong></p>
+<p><strong>核心特点：</strong></p>
+<ul>
+<li class="">🎯 <strong>可扩展</strong>：加功能不改老代码</li>
+<li class="">🔧 <strong>易维护</strong>：新人能快速上手</li>
+<li class="">⚡ <strong>高性能</strong>：能应对流量增长</li>
+<li class="">🛡️ <strong>高可靠</strong>：出问题能快速定位</li>
+<li class="">🔒 <strong>安全性</strong>：有完善的防护机制</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-对比示例普通项目-vs-架构级项目">📊 对比示例：普通项目 vs 架构级项目<a href="https://lianghchao.github.io/docs/blog/java-spring%20boot#-%E5%AF%B9%E6%AF%94%E7%A4%BA%E4%BE%8B%E6%99%AE%E9%80%9A%E9%A1%B9%E7%9B%AE-vs-%E6%9E%B6%E6%9E%84%E7%BA%A7%E9%A1%B9%E7%9B%AE" class="hash-link" aria-label="Direct link to 📊 对比示例：普通项目 vs 架构级项目" title="Direct link to 📊 对比示例：普通项目 vs 架构级项目" translate="no">​</a></h2>
+<table><thead><tr><th>场景</th><th>普通项目（学生/初级开发）</th><th>架构级项目（企业级）</th></tr></thead><tbody><tr><td><strong>用户登录</strong></td><td>Controller直接查数据库，密码明文存储</td><td>分层架构：Controller → Service → AuthProvider<br>密码BCrypt加密 + 登录失败限流 + 支持OAuth2扩展</td></tr><tr><td><strong>新增功能</strong></td><td>在原有类里疯狂加if-else</td><td>通过策略模式/插件机制<br>不改核心代码就能扩展新功能</td></tr><tr><td><strong>系统崩溃</strong></td><td>日志全是System.out.println<br>出问题找不到原因</td><td>全链路TraceID + 结构化日志<br>监控告警 + 自动定位问题</td></tr><tr><td><strong>流量突增</strong></td><td>直接宕机，服务不可用</td><td>熔断降级 + 缓存机制<br>异步处理 + 负载均衡</td></tr><tr><td><strong>团队协作</strong></td><td>所有人改同一个包<br>代码冲突频繁</td><td>模块解耦 + 接口契约<br>并行开发互不影响</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-架构级项目的4大核心特征">🔍 架构级项目的4大核心特征<a href="https://lianghchao.github.io/docs/blog/java-spring%20boot#-%E6%9E%B6%E6%9E%84%E7%BA%A7%E9%A1%B9%E7%9B%AE%E7%9A%844%E5%A4%A7%E6%A0%B8%E5%BF%83%E7%89%B9%E5%BE%81" class="hash-link" aria-label="Direct link to 🔍 架构级项目的4大核心特征" title="Direct link to 🔍 架构级项目的4大核心特征" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-分层清晰layered-architecture">1. 分层清晰（Layered Architecture）<a href="https://lianghchao.github.io/docs/blog/java-spring%20boot#1-%E5%88%86%E5%B1%82%E6%B8%85%E6%99%B0layered-architecture" class="hash-link" aria-label="Direct link to 1. 分层清晰（Layered Architecture）" title="Direct link to 1. 分层清晰（Layered Architecture）" translate="no">​</a></h3>
+<p><strong>就像盖房子一样，每层都有明确职责：</strong></p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">表现层 (Controller)     ← 接收用户请求</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ↓</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">应用层 (Service)       ← 处理业务流程</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ↓</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">领域层 (Domain)        ← 核心业务逻辑</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ↓</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">基础设施层 (Infra)     ← 数据库、缓存等技术实现</span><br></span></code></pre></div></div>
+<p><strong>好处：</strong> 高内聚低耦合，业务逻辑不依赖具体技术框架</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-关注非功能性需求">2. 关注非功能性需求<a href="https://lianghchao.github.io/docs/blog/java-spring%20boot#2-%E5%85%B3%E6%B3%A8%E9%9D%9E%E5%8A%9F%E8%83%BD%E6%80%A7%E9%9C%80%E6%B1%82" class="hash-link" aria-label="Direct link to 2. 关注非功能性需求" title="Direct link to 2. 关注非功能性需求" translate="no">​</a></h3>
+<table><thead><tr><th>需求</th><th>架构体现</th><th>简单理解</th></tr></thead><tbody><tr><td><strong>可扩展性</strong></td><td>策略模式、插件机制</td><td>加功能不改老代码</td></tr><tr><td><strong>可靠性</strong></td><td>重试机制、熔断器</td><td>出错能自动恢复</td></tr><tr><td><strong>可观测性</strong></td><td>链路追踪、监控告警</td><td>出问题能快速发现</td></tr><tr><td><strong>安全性</strong></td><td>权限控制、数据脱敏</td><td>保护系统和数据安全</td></tr><tr><td><strong>可部署性</strong></td><td>Docker + CI/CD</td><td>一键部署，自动发布</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-使用成熟架构模式">3. 使用成熟架构模式<a href="https://lianghchao.github.io/docs/blog/java-spring%20boot#3-%E4%BD%BF%E7%94%A8%E6%88%90%E7%86%9F%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F" class="hash-link" aria-label="Direct link to 3. 使用成熟架构模式" title="Direct link to 3. 使用成熟架构模式" translate="no">​</a></h3>
+<p><strong>常见的架构模式：</strong></p>
+<ul>
+<li class=""><strong>DDD（领域驱动设计）</strong>：把复杂的业务逻辑组织得清清楚楚</li>
+<li class=""><strong>CQRS</strong>：读写分离，查询和修改用不同的方式处理</li>
+<li class=""><strong>事件驱动</strong>：用消息队列解耦系统组件</li>
+<li class=""><strong>六边形架构</strong>：核心业务与外部技术解耦</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4-工程化能力完备">4. 工程化能力完备<a href="https://lianghchao.github.io/docs/blog/java-spring%20boot#4-%E5%B7%A5%E7%A8%8B%E5%8C%96%E8%83%BD%E5%8A%9B%E5%AE%8C%E5%A4%87" class="hash-link" aria-label="Direct link to 4. 工程化能力完备" title="Direct link to 4. 工程化能力完备" translate="no">​</a></h3>
+<ul>
+<li class="">✅ <strong>自动化测试</strong>：单元测试、集成测试、端到端测试</li>
+<li class="">✅ <strong>代码质量</strong>：SonarQube代码检查、代码规范</li>
+<li class="">✅ <strong>配置管理</strong>：Nacos/Apollo统一配置中心</li>
+<li class="">✅ <strong>API网关</strong>：Spring Cloud Gateway统一入口</li>
+<li class="">✅ <strong>分布式事务</strong>：Seata/Saga保证数据一致性</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-实战案例订单创建功能">🌰 实战案例：订单创建功能<a href="https://lianghchao.github.io/docs/blog/java-spring%20boot#-%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%AE%A2%E5%8D%95%E5%88%9B%E5%BB%BA%E5%8A%9F%E8%83%BD" class="hash-link" aria-label="Direct link to 🌰 实战案例：订单创建功能" title="Direct link to 🌰 实战案例：订单创建功能" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-普通写法面条代码">❌ 普通写法（面条代码）<a href="https://lianghchao.github.io/docs/blog/java-spring%20boot#-%E6%99%AE%E9%80%9A%E5%86%99%E6%B3%95%E9%9D%A2%E6%9D%A1%E4%BB%A3%E7%A0%81" class="hash-link" aria-label="Direct link to ❌ 普通写法（面条代码）" title="Direct link to ❌ 普通写法（面条代码）" translate="no">​</a></h3>
+<div class="language-java codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-java codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">@PostMapping("/order")</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">public Result createOrder(OrderDTO dto) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // 1. 校验库存</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    if (stockService.get(dto.getSkuId()) &lt; dto.getCount()) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        return error("库存不足");</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // 2. 扣减库存（直接调 DB）</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stockMapper.decrease(dto.getSkuId(), dto.getCount());</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // 3. 创建订单</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    orderMapper.insert(dto);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // 4. 发送短信</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    smsService.send("下单成功");</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    return success();</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<p><strong>问题：</strong></p>
+<ul>
+<li class="">🔄 耦合严重：所有逻辑写在一起</li>
+<li class="">🚨 无法回滚：出错就数据不一致</li>
+<li class="">🔄 无幂等：重复提交会出问题</li>
+<li class="">🧪 难测试：要启动整个数据库</li>
+<li class="">🔄 难扩展：加功能就要改核心代码</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-架构级写法">✅ 架构级写法<a href="https://lianghchao.github.io/docs/blog/java-spring%20boot#-%E6%9E%B6%E6%9E%84%E7%BA%A7%E5%86%99%E6%B3%95" class="hash-link" aria-label="Direct link to ✅ 架构级写法" title="Direct link to ✅ 架构级写法" translate="no">​</a></h3>
+<div class="language-java codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-java codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">// 1. 应用服务层 - 处理业务流程</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">@Transactional</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">public OrderId createOrder(CreateOrderCommand cmd) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // 领域校验</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    Product product = productRepository.findById(cmd.getSkuId());</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    product.checkStock(cmd.getCount());</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // 创建订单</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    Order order = Order.create(cmd);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    orderRepository.save(order);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // 发布事件（解耦）</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    eventPublisher.publish(new OrderCreatedEvent(order.getId()));</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    return order.getId();</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">// 2. 基础设施层 - 监听事件发短信</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">@EventListener</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">public void onOrderCreated(OrderCreatedEvent event) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    smsClient.sendAsync("下单成功"); // 异步处理</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<p><strong>优势：</strong></p>
+<ul>
+<li class="">✅ 业务逻辑集中在领域层</li>
+<li class="">✅ 事务安全，自动回滚</li>
+<li class="">✅ 扩展点清晰（加积分？监听同一事件）</li>
+<li class="">✅ 可测试（Mock Repository即可）</li>
+<li class="">✅ 解耦合（发短信不影响下单主流程）</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-如何识别架构级项目">💡 如何识别架构级项目？<a href="https://lianghchao.github.io/docs/blog/java-spring%20boot#-%E5%A6%82%E4%BD%95%E8%AF%86%E5%88%AB%E6%9E%B6%E6%9E%84%E7%BA%A7%E9%A1%B9%E7%9B%AE" class="hash-link" aria-label="Direct link to 💡 如何识别架构级项目？" title="Direct link to 💡 如何识别架构级项目？" translate="no">​</a></h2>
+<p>看开源项目时，重点检查这些特征：</p>
+<p>✅ <strong>代码结构清晰</strong></p>
+<ul>
+<li class="">有domain包？→ 有DDD思想</li>
+<li class="">有config/aspect/exception包？→ 有全局处理</li>
+<li class="">Repository用接口定义？→ 解耦良好</li>
+</ul>
+<p>✅ <strong>工程化完善</strong></p>
+<ul>
+<li class="">有docker-compose.yml？→ 支持容器化部署</li>
+<li class="">有.github/workflows？→ 有CI/CD流水线</li>
+<li class="">README有架构图？→ 设计文档完善</li>
+</ul>
+<p>✅ <strong>技术选型成熟</strong></p>
+<ul>
+<li class="">用Spring Boot + Spring Cloud？</li>
+<li class="">有统一配置中心？</li>
+<li class="">有链路追踪和监控？</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-学习路径推荐">📚 学习路径推荐<a href="https://lianghchao.github.io/docs/blog/java-spring%20boot#-%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84%E6%8E%A8%E8%8D%90" class="hash-link" aria-label="Direct link to 📚 学习路径推荐" title="Direct link to 📚 学习路径推荐" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-入门阶段">🎯 入门阶段<a href="https://lianghchao.github.io/docs/blog/java-spring%20boot#-%E5%85%A5%E9%97%A8%E9%98%B6%E6%AE%B5" class="hash-link" aria-label="Direct link to 🎯 入门阶段" title="Direct link to 🎯 入门阶段" translate="no">​</a></h3>
+<ol>
+<li class="">
+<p><strong>先理解概念</strong></p>
+<ul>
+<li class="">《企业应用架构模式》- Martin Fowler</li>
+<li class="">《Head First设计模式》- 简单易懂</li>
+</ul>
+</li>
+<li class="">
+<p><strong>看优秀源码</strong></p>
+<ul>
+<li class="">Spring Boot源码（分层结构清晰）</li>
+<li class="">MyBatis-Plus源码（插件机制）</li>
+</ul>
+</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-进阶阶段">🚀 进阶阶段<a href="https://lianghchao.github.io/docs/blog/java-spring%20boot#-%E8%BF%9B%E9%98%B6%E9%98%B6%E6%AE%B5" class="hash-link" aria-label="Direct link to 🚀 进阶阶段" title="Direct link to 🚀 进阶阶段" translate="no">​</a></h3>
+<ol>
+<li class="">
+<p><strong>实践DDD</strong></p>
+<ul>
+<li class="">用Clean Architecture重构一个小项目</li>
+<li class="">从简单电商系统开始练习</li>
+</ul>
+</li>
+<li class="">
+<p><strong>学习微服务</strong></p>
+<ul>
+<li class="">Spring Cloud Alibaba全家桶</li>
+<li class="">Eventuate Tram（分布式事务）</li>
+<li class="">Moduliths（模块化单体）</li>
+</ul>
+</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-高级阶段">🏆 高级阶段<a href="https://lianghchao.github.io/docs/blog/java-spring%20boot#-%E9%AB%98%E7%BA%A7%E9%98%B6%E6%AE%B5" class="hash-link" aria-label="Direct link to 🏆 高级阶段" title="Direct link to 🏆 高级阶段" translate="no">​</a></h3>
+<ol>
+<li class="">
+<p><strong>架构设计</strong></p>
+<ul>
+<li class="">C4模型画架构图</li>
+<li class="">高并发系统设计</li>
+<li class="">分布式系统设计</li>
+</ul>
+</li>
+<li class="">
+<p><strong>团队协作</strong></p>
+<ul>
+<li class="">架构评审流程</li>
+<li class="">技术方案设计</li>
+<li class="">代码规范制定</li>
+</ul>
+</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-总结">🎯 总结<a href="https://lianghchao.github.io/docs/blog/java-spring%20boot#-%E6%80%BB%E7%BB%93" class="hash-link" aria-label="Direct link to 🎯 总结" title="Direct link to 🎯 总结" translate="no">​</a></h2>
+<p><strong>一句话理解：</strong></p>
+<blockquote>
+<p>架构级项目 = 好的代码结构 + 完善的工程化 + 成熟的设计思想</p>
+</blockquote>
+<p><strong>核心价值：</strong></p>
+<ul>
+<li class="">📈 <strong>业务增长</strong>：系统能支撑业务快速发展</li>
+<li class="">👥 <strong>团队扩张</strong>：新人能快速上手，协作效率高</li>
+<li class="">🔧 <strong>技术演进</strong>：能平滑升级技术栈</li>
+<li class="">💰 <strong>降本增效</strong>：减少维护成本，提高开发效率</li>
+</ul>
+<p><strong>记住：</strong> 代码是死的，架构思想是活的。好的架构能让复杂系统变得简单可控！</p>]]></content>
+        <author>
+            <name>lianghchao</name>
+            <uri>https://linkedin.com/in/lianghchao</uri>
+        </author>
+        <category label="Java" term="Java"/>
+        <category label="spring boot" term="spring boot"/>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[养生]]></title>
         <id>https://lianghchao.github.io/docs/blog/live food</id>
         <link href="https://lianghchao.github.io/docs/blog/live food"/>
